@@ -87,7 +87,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
   
 <!--  external JavaScript scripts-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -312,14 +312,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#home">Eldur Heron Farm</a>
+        <a class="navbar-brand" href="index.php#home">Eldur Heron Farm</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#archives">ARCHIVES</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#support">SUPPORT</a></li>
-        <li><a href="#contact">CONTACT</a></li>
+        <li><a href="index.php#about">ABOUT</a></li>
+        <li><a href="index.php#support">SUPPORT</a></li>
+        <li><a href="index.php#contact">CONTACT</a></li>
       </ul>
     </div>
   </div>
@@ -685,7 +685,8 @@
       <h4>Viva CSA</h4>
       <p>Summer</p>
       <p>and</p>
-      <p>Fall/Winter</p>
+      <p>Fall/Winter</p> 
+      <p>Learn more and sign-up at <a href="https://vivafarms.org/" target="_blank"><em>Viva Farms</em></a></p>
     </div>
   </div>
   <br><br>
@@ -713,12 +714,12 @@
   <h2 class="text-center">CONTACT</h2>
   <div class="row">
     <div class="col-sm-12" style="margin: auto; text-align: center;">
-      <p>Contact us and we'll get back to you within 3-5 business days.</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span> Mount Vernon, WA</p>
-      <p><span class="glyphicon glyphicon-phone"></span> +1 (360) 202 9484</p>
+      <p>Reach out using a method below and someone will get back to you within 3-5 business days.</p>
       <p><span class="glyphicon glyphicon-envelope"></span> info@eldur-heron-farm.com</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +1 (360) 202 9484</p>
+      <p><i class="fa fa-instagram"></i> @eldur.heron</p>
   
-        <a href="" title="Privacy Policy">Privacy Policy</a> | <a href="" title="Terms of Service">Terms of Service</a>
+      <a href="terms.php" title="Terms of Service and Privacy Policy">Terms and Policies</a>
         
     </div>
 <!--    <div class="col-sm-7">
@@ -758,7 +759,7 @@
   </a>
     
   <p>Bootstrap Theme Originally Made by <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
-  <p><span class="glyphicon glyphicon-copyright-mark"></span> &nbsp; <?php if (date("Y")==2019) { echo " "+date("Y"); } else { echo " 2019-"+date("Y"); }?> ELDUR HERON FARM</p>
+  <p><span class="glyphicon glyphicon-copyright-mark"></span> &nbsp; <?php if ((string)date("Y")=="2019") { echo " "+(string)date("Y"); } else { echo " 2019-"+(string)date("Y"); }?> ELDUR HERON FARM</p>
   
 </footer>
 
