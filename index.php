@@ -6,14 +6,14 @@
     
     <title>Eldur Heron Farm</title>
 
-<?php       include 'includes/head.php'; ?>
+<?php include 'includes/head.php'; ?>
   
 </head>
 
 <body id="home" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <!--    nav bar     -->
-<?php       include 'includes/navbar.php'; ?>
+<?php include 'includes/navbar.php'; ?>
 
 <!--    jumbotron   -->
 <div class="jumbotron text-center">
@@ -24,7 +24,6 @@
       <li data-target="#imgCarousel" data-slide-to="1"></li>
       <li data-target="#imgCarousel" data-slide-to="2"></li>
       <li data-target="#imgCarousel" data-slide-to="3"></li>
-<!--      <li data-target="#imgCarousel" data-slide-to="4"></li>-->
     </ol>
 
     <div class="carousel-inner" role="listbox">
@@ -33,7 +32,7 @@
           <div class="row">
               <div class="col-lg-3"></div>
               <div class="col-lg-6">
-                <img class="img-responsive" title="Most recent photo of plot (2019/11/19)" src="/images/IMG_2412.jpg" />
+                  <img class="img-responsive" title="Most recent photo of plot (2020/01/17)" src="/images/IMG_2790.jpg" />
               </div>
               <div class="col-lg-3"></div>
           </div>
@@ -58,16 +57,6 @@
               <div class="col-lg-3"></div>
           </div>
       </div>
-        
-<!--      <div class="item">
-          <div class="row">
-              <div class="col-lg-3"></div>
-              <div class="col-lg-6">
-                <img class="img-responsive" title="Nathan Minor next to a Tarahumara sunflower" src="/images/IMG_1855.jpg" />
-              </div>
-              <div class="col-lg-3"></div>
-          </div>
-      </div>-->
         
       <div class="item">
           <div class="row">
@@ -95,11 +84,12 @@
   
   <div class="row slideanim">
     <div class="col-sm-4">
-      <span class="glyphicon glyphicon-shopping-cart logo-small"></span>
-      <h4>Local Stores</h4>
-      <p>Keep an eye out for the occasional produce from <em>Eldur Heron Farm</em> at a grocery store near you:</p>
-    <p>Wholefoods</p>
-    <p>Food Co-Op</p>
+      <span class="glyphicon glyphicon-leaf logo-small"></span>
+      <h4>Viva CSA</h4>
+      <p>Summer</p>
+      <p>and</p>
+      <p>Fall/Winter</p> 
+      <p>Learn more and sign-up at <a href="https://vivafarms.org/csa/" target="_blank"><em>Viva Farms</em></a></p>
     </div>
     <div class="col-sm-4">
       <span class="glyphicon glyphicon-grain logo-small"></span>
@@ -107,12 +97,11 @@
       <p>Back in 2016 <em>Eldur Heron Farm</em> was known as <em>Turnip the Beet Farm</em> and sold produce from a large home garden through booths at the <a href="http://mountvernonfarmersmarket.org/" target="_blank"><em>Mount Vernon Farmers Market</em></a> and the <a href="https://bowlittlemarket.com/" target="_blank"><em>Bow Little Market</em></a>. After taking a break from these markets to improve both the quality and quantity of produce, <em>Eldur Heron Farm</em> is looking to return to both these markets soon. Stay tuned for more info!</p>
     </div>
     <div class="col-sm-4">
-      <span class="glyphicon glyphicon-leaf logo-small"></span>
-      <h4>Viva CSA</h4>
-      <p>Summer</p>
-      <p>and</p>
-      <p>Fall/Winter</p> 
-      <p>Learn more and sign-up at <a href="https://vivafarms.org/" target="_blank"><em>Viva Farms</em></a></p>
+      <span class="glyphicon glyphicon-shopping-cart logo-small"></span>
+      <h4>Local Stores</h4>
+      <p>Keep an eye out for the occasional produce from <em>Eldur Heron Farm</em> at a grocery store near you:</p>
+    <p>Wholefoods</p>
+    <p>Food Co-Op</p>
     </div>
   </div>
   <br><br>
@@ -475,7 +464,7 @@
     <div class="col-sm-4">
         <div style='margin: auto; text-align: center;'>
             
-            <img class="img-responsive" alt="Eldur Heron" src="/images/great-blue-heron-silhouette-000000-sm.png" /><br>
+            <img class="img-responsive" alt="Eldur Heron" src="/images/great-blue-heron-silhouette.png" /><br>
 
           <a href="#contact" title="Contact Us">      
           <button class="btn btn-default btn-lg">Get in Touch</button>
@@ -486,7 +475,7 @@
 </div>
 
 <!-- Container (Footer Section) -->
-<?php        include 'includes/footer.php'; ?>
+<?php include 'includes/footer.php'; ?>
 
 </body>
 </html>

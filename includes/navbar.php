@@ -20,11 +20,11 @@ echo <<< "EOD"
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/store/">STORE</a></li>
-        <li><a href="/archives/">ARCHIVES</a></li>
-        <li><a href="#support">SUPPORT</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#contact">CONTACT</a></li>
+        <li><a href="../store/">STORE</a></li>
+        <li><a href="../archives/">ARCHIVES</a></li>
+        <li><a href="../#support">SUPPORT</a></li>
+        <li><a href="../#about">ABOUT</a></li>
+        <li><a href="../#contact">CONTACT</a></li>
       </ul>
     </div>
   </div>

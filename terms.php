@@ -4,16 +4,16 @@
 <!--    HEAD      -->
 <head>
     
-    <title>Eldur Heron Farm | Terms and Policies</title>
+<title>Eldur Heron Farm | Terms and Policies</title>
 
-<?php       include 'includes/head.php'; ?>
+<?php include 'includes/head.php'; ?>
   
 </head>
 
 <body id="home" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <!--    nav bar     -->
-<?php       include 'includes/navbar-terms.php'; ?>
+<?php include 'includes/navbar-terms.php'; ?>
 
 <!-- Container (Terms and Policies Section) -->
 <div id="terms" class="container-fluid">
@@ -142,7 +142,7 @@ The goal is to ship your order within 3-5 days of receiving it, but at peak seas
 </div>
 
 <!-- Container (Footer Section) -->
-<?php        include 'includes/footer.php'; ?>
+<?php include 'includes/footer.php'; ?>
 
 </body>
 </html>
