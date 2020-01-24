@@ -24,6 +24,6 @@ $DB_CONN = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 // first, check to make sure the connection to MySQL DB was successful
 if (mysqli_connect_errno() != 0) {
     
-    //die("Failed to connect to MySQL database: " . mysqli_connect_error());
+    die('Failed to connect to MySQL database: ' . mysqli_connect_error());
     $errorMsg = 'Failed to connect to MySQL database: ' . mysqli_connect_error();
 }

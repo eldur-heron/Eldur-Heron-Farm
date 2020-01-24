@@ -18,16 +18,16 @@ if ($errorMsg != '') { // failed to connect to DB
 
     // next check to make sure the data from the login screen was correctly sent
     if ( !isset($_POST['username'], $_POST['password']) ) {
-
-        //die('Please complete the login form');
+        
         $errorMsg = 'Please complete the login form.';
+        die($errorMsg);
     }
 
     // Make sure the submitted registration values are not empty.
     if (empty($_POST['username']) || empty($_POST['password']) ) {
-
-        //die ('Please complete the login form');
+        
         $errorMsg = 'Please complete the login form.';
+        die($errorMsg);
     }
 
     if ($errorMsg != '') { // there was an error message, redirect back to login screen
@@ -42,8 +42,8 @@ if ($errorMsg != '') { // failed to connect to DB
 
 
         // parse out username and password from POST
-        $username = filter_input(INPUT_POST, 'username');
-        $password = filter_input(INPUT_POST, 'password');
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
         // setup SQL query
         $sql_query = 'SELECT id, passkey FROM Account WHERE username = ?';
@@ -103,7 +103,7 @@ if ($errorMsg != '') { // failed to connect to DB
                         } else {
 
                             // notify user that the SQL statement to authenticate credentials failed
-                            //die('Failed to prepare SQL statement for tracking last login.');
+                            die('Failed to prepare SQL statement for tracking last login.');
                             $errorMsg = 'Failed to prepare SQL statement for tracking last login.';
                         }
 
@@ -142,35 +142,35 @@ if ($errorMsg != '') { // failed to connect to DB
                                     $stmt->fetch();
 
                                     if ($attempts > $maxfailedattempt) {
-                                        //die('Only ' . $maxfailedattempt . ' login attempts allowed per 30 minutes.');
                                         $errorMsg = 'Only ' . $maxfailedattempt . ' login attempts allowed per 30 minutes.';
+                                        die($errorMsg);
                                     }
 
                                 }
                             } else {
 
                                 // notify user that the SQL statement to authenticate credentials failed
-                                //die('Failed to prepare SELECT SQL statement for tracking login attempts.');
                                 $errorMsg = 'Failed to prepare SELECT SQL statement for tracking login attempts.';
+                                die($errorMsg);
                             }
 
                         } else {
 
                             // notify user that the SQL statement to authenticate credentials failed
-                            //die('Failed to prepare SQL statement for tracking login attempts.');
                             $errorMsg = 'Failed to prepare INSERT SQL statement for tracking login attempts.';
+                            die($errorMsg);
                         }
 
                         // notify user of a failed login attempt
-                        //die('Please ensure both username and password are properly entered.');
-                        $errorMsg = 'Please ensure both username and password are properly entered.';
+                        $errorMsg = 'Please ensure both username and password are properly entered. B';
+                        die($errorMsg);
                     }
 
                 } else {
 
                     // notify user of a failed login attempt
-                    //die('Please ensure both username and password are properly entered.');
-                    $errorMsg = 'Please ensure both username and password are properly entered.';
+                    $errorMsg = 'Please ensure both username and password are properly entered. A';
+                    die($errorMsg);
                 }
 
                 // close the statement (?)
@@ -178,7 +178,7 @@ if ($errorMsg != '') { // failed to connect to DB
         } else {
 
             // notify user that the SQL statement to authenticate credentials failed
-            //die('Failed to prepare SQL statement for checking credentials.');
+            die('Failed to prepare SQL statement for checking credentials.');
             $errorMsg = 'Failed to prepare SQL statement for checking credentials.';
         }
 
