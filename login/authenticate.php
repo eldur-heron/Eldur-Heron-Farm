@@ -1,6 +1,14 @@
 <?php
 
-$errorMsg = '';
+if ($errorMsg != ''){
+    
+    if($DEBUGGING){
+        die($errorMsg);
+    }
+    
+} else {
+    $errorMsg = '';
+}
 
 require('../includes/config-db.php');
 
