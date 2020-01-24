@@ -13,7 +13,7 @@
         
 </head>
     
-<body id="home-register" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <!--    nav bar     -->
 <?php include '../includes/navbar-login.php'; ?>
@@ -31,6 +31,17 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12" style="text-align: center;">
+                        <span style="color: #990000;">
+                            <?php
+                                if ($errorMsg != '') {
+                                    echo "ERROR: " . $errorMsg;
+                                }
+                            ?>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12" style="text-align: center;">
                         <a href="../login/">Login</a>
                     </div>
                 </div>
@@ -44,7 +55,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" name="username" placeholder="Username" id="username" required>
+                                    <input type="text" name="username" placeholder="username" id="username" required>
                                 </div>
                             </div>
 
@@ -55,32 +66,24 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="password" name="password" placeholder="Password" id="password" required>
+                                    <input type="password" name="password" placeholder="password" id="password" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label for="email">
-                                        <i class="fas fa-envelope">
-
-
-
-                                        </i>                                    
+                                        <i class="fas fa-envelope"></i>                                    
                                     </label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="email" name="email" placeholder="Email" id="email" required>                                
+                                    <input type="email" name="email" placeholder="email" id="email" required>                                
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-10">
-                                    <label for="accepted">
-                                        <a href="../terms.php" target="_blank"></a>                                    
-                                    </label>
-                                </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-12">
+                                    <a href="../terms.php" target="_blank">Accept Terms</a>
                                     <input type="checkbox" name="accepted" id="accepted" required>                               
                                 </div>
                             </div>

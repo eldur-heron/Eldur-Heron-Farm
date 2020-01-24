@@ -2,10 +2,9 @@
 
 session_start();
 
-if (!isset($_SESSION['loggedin'])) {
-    $loggedin = FALSE;
-} else {
-    //$loggedin = filter_input(INPUT_SESSION, 'loggedin');
+$loggedin = FALSE;
+
+if (isset($_SESSION['loggedin'])) {
     $loggedin = $_SESSION['loggedin'];
 }
 

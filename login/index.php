@@ -13,13 +13,10 @@
         
 </head>
     
-<body id="home-login" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <!--    nav bar     -->
 <?php include '../includes/navbar-login.php'; ?>
-
-<br>
-<br>
 
 <div id="login" class="container-fluid">
 
@@ -32,7 +29,18 @@
                         <h1>Login</h1>
                     </div>
                 </div>
-<!--  REMOVE option from public
+                <div class="row">
+                    <div class="col-lg-12" style="text-align: center;">
+                        <span style="color: #990000;">
+                            <?php
+                                if ($errorMsg != '') {
+                                    echo "ERROR: " . $errorMsg;
+                                }
+                            ?>
+                        </span>
+                    </div>
+                </div>
+<!--  REMOVE option from public (for now)
                 <div class="row">
                     <div class="col-lg-12" style="text-align: center;">
                         <a href="../register/">Register</a>
@@ -45,12 +53,12 @@
                             <label for="username">
                                 <i class="fas fa-user"></i>
                             </label>
-                            <input type="text" name="username" placeholder="Username" id="username" required>
+                            <input type="text" name="username" placeholder="username" id="username" required>
 
                             <label for="password">
                                 <i class="fas fa-lock"></i>
                             </label>
-                            <input type="password" name="password" placeholder="Password" id="password" required>
+                            <input type="password" name="password" placeholder="password" id="password" required>
 
                             <input type="submit" value="Login">
 

@@ -131,11 +131,8 @@ The goal is to ship your order within 3-5 days of receiving it, but at peak seas
     <div class="col-sm-4">
         <div style='margin: auto; text-align: center;'>
             
-            <img class="img-responsive" alt="Eldur Heron" src="/graphix/great-blue-heron-silhouette-000000-sm.png" /><br>
-
-          <a href="#contact" title="Contact Us">      
-          <button class="btn btn-default btn-lg">Get in Touch</button>
-          </a>
+            <img class="img-responsive" alt="Eldur Heron" src="../images/great-blue-heron-silhouette.png" />
+            
         </div>
     </div>
   </div>

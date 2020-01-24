@@ -13,7 +13,7 @@
   
 </head>
 
-<body id="home-archives" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <!--    nav bar     -->
 <?php include '../includes/navbar-archives.php'; ?>

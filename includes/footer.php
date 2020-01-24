@@ -6,6 +6,8 @@
  * and open the template in the editor.
  */
 
+$year = date("Y");
+
 echo <<< "EOD"
 
 <footer class="container-fluid text-center">
@@ -32,7 +34,7 @@ echo <<< "EOD"
         </a>
 
         <p>Bootstrap Theme Originally Made by <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
-        <p><span class="glyphicon glyphicon-copyright-mark"></span> &nbsp; 2019 ELDUR HERON FARM</p>
+        <p><span class="glyphicon glyphicon-copyright-mark"></span> &nbsp; $year ELDUR HERON FARM</p>
     </div>
 </footer>
 

@@ -23,10 +23,10 @@ echo <<< "EOD"
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <!--  local style adjustments   -->
-    <link rel="stylesheet" type="text/css" href="/includes/style.css">
+    <link rel="stylesheet" type="text/css" href="../includes/style.css">
 
     <!--smooth scrolling animation JavaScript-->
-    <script src="/includes/smoothScroll.js"></script>
+    <script src="../includes/smoothScroll.js"></script>
 EOD;
 
 ?>
