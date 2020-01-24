@@ -16,7 +16,10 @@ if ($errorMsg != '') { // failed to connect to DB
     if (!isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['accepted'])) {
         
         $errorMsg = 'Please complete the registration form.';
-        die($errorMsg);
+    
+        if ($DEBUGGING) {
+            die($errorMsg);
+        }
 
     }
 
@@ -24,26 +27,38 @@ if ($errorMsg != '') { // failed to connect to DB
     if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['accepted'])) {
         
         $errorMsg = 'Please complete the registration form.';
-        die($errorMsg);
+    
+        if ($DEBUGGING) {
+            die($errorMsg);
+        }
     }
 
     if (preg_match('/[A-Za-z0-9]+/', $_POST['username']) == 0) {
         
         $errorMsg = 'Please enter a valid username.';
-        die($errorMsg);
+    
+        if ($DEBUGGING) {
+            die($errorMsg);
+        }
 
     }
 
     if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
         
         $errorMsg = 'Please enter a valid password. Passwords must be between 5 and 20 characters long.';
-        die($errorMsg);
+    
+        if ($DEBUGGING) {
+            die($errorMsg);
+        }
     }
 
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         
         $errorMsg = 'Please enter a valid email.';
-        die($errorMsg);
+    
+        if ($DEBUGGING) {
+            die($errorMsg);
+        }
     }
 
     if ($errorMsg != '') { // there was an error message, redirect back to register screen
@@ -66,7 +81,10 @@ if ($errorMsg != '') { // failed to connect to DB
         if (!accepted) {
             
             $errorMsg = 'User must accept terms of service to create an account.';
-            die($errorMsg);
+    
+            if ($DEBUGGING) {
+                die($errorMsg);
+            }
             
         } else {
 
@@ -77,15 +95,32 @@ if ($errorMsg != '') { // failed to connect to DB
 
                 // notify user that the SQL statement to check the existence of a username failed
                 $errorMsg = 'Failed to prepare SQL statement for checking username.';
-                die($errorMsg);
+    
+                if ($DEBUGGING) {
+                    die($errorMsg);
+                }
                 
             } else {
                     // Bind parameters (s = string, i = int, b = blob, etc), 
                     // in our case the username is a string so we use "s"
-                    $stmt->bind_param('s', $username);
+                    if (!$stmt->bind_param('s', $username)) { // failed to bind
+                               
+                        $errorMsg = 'Failed to bind parameters for SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                        if ($DEBUGGING) {
+                            die($errorMsg);
+                        }
+                    }
 
                     // execute SQL statement
-                    $stmt->execute();
+                    if (!$stmt->execute()) { //failed to execute
+                               
+                        $errorMsg = 'Failed to execute SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                        if ($DEBUGGING) {
+                            die($errorMsg);
+                        } 
+                    }
 
                     // Store the result so we can check if the account exists in the database.
                     $stmt->store_result();
@@ -95,7 +130,10 @@ if ($errorMsg != '') { // failed to connect to DB
 
                         // notify user that account is already created under this username
                         $errorMsg = 'Please create a unique username.';
-                        die($errorMsg);
+    
+                        if ($DEBUGGING) {
+                            die($errorMsg);
+                        }
 
                     } else {
 
@@ -108,7 +146,10 @@ if ($errorMsg != '') { // failed to connect to DB
 
                             // notify user that the SQL statement to insert new account data failed
                             $errorMsg = 'Failed to prepare SQL statement for creating an account.';
-                            die($errorMsg);
+    
+                            if ($DEBUGGING) {
+                                die($errorMsg);
+                            }
                             
                         } else {
 
@@ -119,15 +160,23 @@ if ($errorMsg != '') { // failed to connect to DB
                                             hash('sha256', $password, true)), PASSWORD_DEFAULT);
 
                            // bind parameters to SQL statement (this approach prevents SQL injection)
-                           if (!$stmt->bind_param('sss', $username, $passkey, $email)) {
-                               $errorMsg = 'Failed to bind parameters for SQL statement for creating an account (' . $stmt->errno . ') ' . $stmt->error;
-                               die($errorMsg);
+                           if (!$stmt->bind_param('sss', $username, $passkey, $email)) { // failed to bind
+                               
+                                $errorMsg = 'Failed to bind parameters for SQL statement for creating an account (' . $stmt->errno . ') ' . $stmt->error;
+    
+                                if ($DEBUGGING) {
+                                    die($errorMsg);
+                                }
                            }
 
                            // execute SQL insert for new account
-                           if (!$stmt->execute()) {
-                               $errorMsg = 'Failed to execute SQL statement for creating an account [' . $username . ', '. $email . '] (' . $stmt->errno . ') ' . $stmt->error;
-                               die($errorMsg);
+                           if (!$stmt->execute()) { // failed to execute
+                               
+                                $errorMsg = 'Failed to execute SQL statement for creating an account (' . $stmt->errno . ') ' . $stmt->error;
+    
+                                if ($DEBUGGING) {
+                                    die($errorMsg);
+                                }
                            }
 
                         }

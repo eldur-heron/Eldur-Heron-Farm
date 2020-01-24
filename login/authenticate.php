@@ -20,14 +20,20 @@ if ($errorMsg != '') { // failed to connect to DB
     if ( !isset($_POST['username'], $_POST['password']) ) {
         
         $errorMsg = 'Please complete the login form.';
-        die($errorMsg);
+    
+        if ($DEBUGGING) {
+            die($errorMsg);
+        }
     }
 
     // Make sure the submitted registration values are not empty.
     if (empty($_POST['username']) || empty($_POST['password']) ) {
         
         $errorMsg = 'Please complete the login form.';
-        die($errorMsg);
+    
+        if ($DEBUGGING) {
+            die($errorMsg);
+        }
     }
 
     if ($errorMsg != '') { // there was an error message, redirect back to login screen
@@ -50,21 +56,52 @@ if ($errorMsg != '') { // failed to connect to DB
 
         // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
         $stmt = $DB_CONN->prepare($sql_query);
+        
+        if (!$stmt) { // failed to prepare SQL
 
-        // when the statement gets successfully constructed, continue with binding and executing
-        if ($stmt) {
+            // notify user that the SQL statement to authenticate credentials failed
+            $errorMsg = 'Failed to prepare SQL statement for checking credentials.';
+    
+            if ($DEBUGGING) {
+                die($errorMsg);
+            }
+            
+        } else {
                 // Bind parameters (s = string, i = int, b = blob, etc), 
                 // in our case the username is a string so we use "s"
-                $stmt->bind_param('s', $username);
+                if (!$stmt->bind_param('s', $username)) { // failed to bind
+                               
+                    $errorMsg = 'Failed to bind parameters for SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                    if ($DEBUGGING) {
+                        die($errorMsg);
+                    }
+                }
 
                 // execute SQL statement
-                $stmt->execute();
+                if (!$stmt->execute()) { // failed to execute
+                               
+                    $errorMsg = 'Failed to execute SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                    if ($DEBUGGING) {
+                        die($errorMsg);
+                    }
+                }
 
                 // Store the result so we can check if the account exists in the database.
                 $stmt->store_result();
 
                 // when the statement returns at least one row
-                if ($stmt->num_rows > 0) {
+                if ($stmt->num_rows <= 0) {
+
+                    // notify user of a failed login attempt
+                    $errorMsg = 'Please ensure both username and password are properly entered.';
+    
+                    if ($DEBUGGING) {
+                        die($errorMsg);
+                    }
+                    
+                } else {
 
                     // fetch the results
                     $stmt->bind_result($id, $passkey);
@@ -94,17 +131,35 @@ if ($errorMsg != '') { // failed to connect to DB
 
                         $stmt = $DB_CONN->prepare($sql_query);
 
-                        if ($stmt) {
-
-                            $stmt->bind_param('i', $id);
-
-                            $stmt->execute();
-
-                        } else {
+                        if (!$stmt) {
 
                             // notify user that the SQL statement to authenticate credentials failed
-                            die('Failed to prepare SQL statement for tracking last login.');
                             $errorMsg = 'Failed to prepare SQL statement for tracking last login.';
+    
+                            if ($DEBUGGING) {
+                                die($errorMsg);
+                            }
+                            
+                        } else {
+
+                            if (!$stmt->bind_param('i', $id)) { // failed to bind
+                               
+                                $errorMsg = 'Failed to bind parameters for SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                                if ($DEBUGGING) {
+                                    die($errorMsg);
+                                }
+                            }
+
+                            if (!$stmt->execute()) { // failed to execute
+                               
+                                $errorMsg = 'Failed to execute SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                                if ($DEBUGGING) {
+                                    die($errorMsg);
+                                }                                
+                            }
+
                         }
 
 
@@ -118,21 +173,67 @@ if ($errorMsg != '') { // failed to connect to DB
 
                         $stmt = $DB_CONN->prepare($sql_query);
 
-                        if ($stmt) {
+                        if (!$stmt) {
 
-                            $stmt->bind_param('si', $ip, $diff);
+                            // notify user that the SQL statement to authenticate credentials failed
+                            $errorMsg = 'Failed to prepare INSERT SQL statement for tracking login attempts.';
+    
+                            if ($DEBUGGING) {
+                                die($errorMsg);
+                            }
+                        } else {
 
-                            $stmt->execute();
+                            if (!$stmt->bind_param('si', $ip, $diff)) { // failed to bind
+                               
+                                $errorMsg = 'Failed to bind parameters for SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                                if ($DEBUGGING) {
+                                    die($errorMsg);
+                                }
+                            }
+
+                            if (!$stmt->execute()) { //failed to execute
+                               
+                                $errorMsg = 'Failed to execute SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                                if ($DEBUGGING) {
+                                    die($errorMsg);
+                                }                                
+                            }
 
                             $sql_query = 'SELECT COUNT(*) FROM LoginAttempts WHERE ipAddress LIKE ? AND timeDiff > ?';
 
                             $stmt = $DB_CONN->prepare($sql_query);
 
-                            if ($stmt) {
+                            if (!$stmt) { // failed to prepare SQL
 
-                                $stmt->bind_param('si', $ip, $diff);
+                                // notify user that the SQL statement to authenticate credentials failed
+                                $errorMsg = 'Failed to prepare SELECT SQL statement for tracking login attempts.';
+    
+                                if ($DEBUGGING) {
+                                    die($errorMsg);
+                                }
+                                
+                            } else {
 
-                                $stmt->execute();
+                                if (!$stmt->bind_param('si', $ip, $diff)) {
+                               
+                                    $errorMsg = 'Failed to bind parameters for SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                                    if ($DEBUGGING) {
+                                        die($errorMsg);
+                                    }
+                                }
+
+                                if (!$stmt->execute()) { // failed to execute
+                               
+                                    $errorMsg = 'Failed to execute SQL statement (' . $stmt->errno . ') ' . $stmt->error;
+
+                                    if ($DEBUGGING) {
+                                        die($errorMsg);
+                                    }
+                                    
+                                }
 
                                 $stmt->store_result();
 
@@ -142,44 +243,30 @@ if ($errorMsg != '') { // failed to connect to DB
                                     $stmt->fetch();
 
                                     if ($attempts > $maxfailedattempt) {
+                                        
                                         $errorMsg = 'Only ' . $maxfailedattempt . ' login attempts allowed per 30 minutes.';
-                                        die($errorMsg);
+    
+                                        if ($DEBUGGING) {
+                                            die($errorMsg);
+                                        }
                                     }
 
                                 }
-                            } else {
-
-                                // notify user that the SQL statement to authenticate credentials failed
-                                $errorMsg = 'Failed to prepare SELECT SQL statement for tracking login attempts.';
-                                die($errorMsg);
                             }
 
-                        } else {
-
-                            // notify user that the SQL statement to authenticate credentials failed
-                            $errorMsg = 'Failed to prepare INSERT SQL statement for tracking login attempts.';
-                            die($errorMsg);
                         }
 
                         // notify user of a failed login attempt
-                        $errorMsg = 'Please ensure both username and password are properly entered. B';
-                        die($errorMsg);
+                        $errorMsg = 'Please ensure both username and password are properly entered.';
+    
+                        if ($DEBUGGING) {
+                            die($errorMsg);
+                        }
                     }
-
-                } else {
-
-                    // notify user of a failed login attempt
-                    $errorMsg = 'Please ensure both username and password are properly entered. A';
-                    die($errorMsg);
                 }
 
                 // close the statement (?)
                 $stmt->close();
-        } else {
-
-            // notify user that the SQL statement to authenticate credentials failed
-            die('Failed to prepare SQL statement for checking credentials.');
-            $errorMsg = 'Failed to prepare SQL statement for checking credentials.';
         }
 
         if ($errorMsg == '') { // successful! redirect to archives
