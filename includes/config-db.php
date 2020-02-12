@@ -1,14 +1,14 @@
 <?php
 
-$DEBUGGING = FALSE;
+$DEBUGGING = TRUE;
 
 // DEV
-//$DB_USER = 'root';
-//$DB_PASS = 'p@$$w0Rd';
+$DB_USER = 'root';
+$DB_PASS = 'p@$$w0Rd';
 //
 // LIVE
-$DB_USER = "merlin";
-$DB_PASS = "aV@l0n20";
+//$DB_USER = "merlin";
+//$DB_PASS = "aV@l0n20";
 
 // same for both LIVE & DEV
 $DB_HOST = '127.0.0.1:3306';

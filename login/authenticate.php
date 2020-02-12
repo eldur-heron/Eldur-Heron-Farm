@@ -277,18 +277,15 @@ if ($errorMsg != '') { // failed to connect to DB
                 $stmt->close();
         }
 
-        if ($errorMsg == '') { // successful! redirect to archives
+        // close DB connection
+        $DB_CONN->close();
 
-            // close DB connection
-            $DB_CONN->close();
+        if ($errorMsg == '') { // successful! redirect to archives
 
             header('Location: ../archives/');
             exit();
 
         } else { // there was an error message, redirect back to login screen
-
-            // close DB connection
-            $DB_CONN->close();
 
             header('Location: ../login/');
             exit();
