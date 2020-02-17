@@ -60,7 +60,9 @@
         </div>
         <div class="col-sm-8">
             ************ &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="../account/reset-password.php">Reset</a>
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#changepw">
+                Change
+            </button>
         </div>
     </div>
     
@@ -98,6 +100,63 @@
         <div class="col-sm-8">
             <?php echo $created; ?>
         </div>
+    </div>    
+
+    <div id="changepw" class="modal fade" role="dialog" style="margin-top: 10%;">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4>Change Password</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form action="changepw.php" method="POST">
+
+                        <div class="form-group">
+
+                            <label for="oldpw">Old Password:</label>
+
+                            <input type="password" class="form-control" id="oldpw">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="oldpw">New Password:</label>
+
+                            <input type="password" class="form-control" id="newpw1">
+
+                        </div>
+
+                        <button type="submit" class="btn btn-default" data-dismiss="modal">
+                            Change
+                        </button>            
+
+                        <button type="reset" class="btn btn-default">
+                            Reset
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
     
 </div>
