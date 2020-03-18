@@ -16,6 +16,8 @@
             <file>file:/home/hiccup/GitHub/Eldur-Heron-Farm/login/authenticate.php</file>
             <file>file:/home/hiccup/GitHub/Eldur-Heron-Farm/includes/config-db.php</file>
             <file>file:/home/hiccup/GitHub/Eldur-Heron-Farm/terms.php</file>
+            <file>file:/home/hiccup/GitHub/Eldur-Heron-Farm/account/load-details.php</file>
+            <file>file:/home/hiccup/GitHub/Eldur-Heron-Farm/account/changepw.php</file>
         </group>
     </open-files>
 </project-private>

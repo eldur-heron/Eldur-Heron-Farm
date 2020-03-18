@@ -47,12 +47,11 @@
 
                     <div class="row">
                         
-                        <div class="col-sm-3 col-md-3 col-lg-3" style="padding: 20px;">
+                        <div class="col-sm-3 col-md-2 col-lg-2" style="padding: 20px;">
 
                             <ul class="nav nav-tabs nav-stacked">
                                 <li class="active"><a data-toggle="tab" href="#fields">Fields</a></li>
                                 <li><a data-toggle="tab" href="#rotation">Rotation</a></li>
-                                <li><a data-toggle="tab" href="#families">Families</a></li>
                                 <li><a data-toggle="tab" href="#crops">Crops</a></li>
                                 <li><a data-toggle="tab" href="#varieties">Varieties</a></li>
                                 <li><a data-toggle="tab" href="#pMethods">Planting Methods</a></li>
@@ -64,24 +63,206 @@
 
                         </div>
                         
-                        <div class="col-sm-9 col-md-9 col-lg-9">
+                        <div class="col-sm-9 col-md-10 col-lg-10">
                             
                             <div class="tab-content">
                                 
                                 <div id="fields" class="tab-pane fade in active">
                                     <h1>FIELDS</h1>
+                                    
+                                    <div style="overflow-x: auto;">
+                                        <table>
+                                            <tr>
+                                                <th>SEASON</th>                                        
+                                                <th>LABEL</th>
+                                                <th>LAT</th>
+                                                <th>LON</th>
+                                                <th>ORIENTATION</th>
+                                                <th>W (m)</th>
+                                                <th>L (m)</th>
+                                                <th>AREA (sq m)</th>
+                                            </tr>
+
+                                            <?php 
+
+                                            require('../includes/config-db.php');
+
+                                            // setup SQL query
+                                            $sql_query = "CALL `polestar`.`sp_GetAllFields`();";
+
+                                            if ($results = $DB_CONN->query($sql_query)) {
+                                                if ($results->num_rows > 0) {
+
+                                                    while ($row = $results->fetch_array()) {
+                                                        echo '<tr>';
+                                                        echo '<td class="l">' . $row['season'] . '</td>';
+                                                        echo '<td class="l">' . $row['label'] . '</td>';
+                                                        echo '<td class="l">' . $row['lat'] . '</td>';
+                                                        echo '<td class="l">' . $row['lon'] . '</td>';
+                                                        echo '<td class="c">' . $row['orientation'] . '</td>';
+                                                        echo '<td class="c">' . $row['W'] . '</td>';
+                                                        echo '<td class="c">' . $row['L'] . '</td>';
+                                                        echo '<td class="c">' . $row['A'] . '</td>';
+                                                        echo '</tr>';
+                                                    }
+
+                                                }
+                                            }
+
+                                            // close DB connection
+                                            $DB_CONN->close();
+                                            ?>
+
+                                        </table>
+                                    </div>
+                                    
                                 </div>
                                 
                                 <div id="rotation" class="tab-pane fade">
                                     <h1>ROTATION</h1>
-                                </div>
-                                
-                                <div id="families" class="tab-pane fade">
-                                    <h1>FAMILIES</h1>
+                                    
+                                    <div style="overflow-x: auto;">
+                                        <table>
+                                            <tr>
+                                                <th>#</th>                                        
+                                                <th>Rotation</th>
+                                                <th>Family (common)</th>
+                                                <th>Family (scientific)</th>
+                                            </tr>
+
+                                            <?php 
+
+                                            require('../includes/config-db.php');
+
+                                            // setup SQL query
+                                            $sql_query = "CALL `polestar`.`sp_GetAllRotations`();";
+
+                                            if ($results = $DB_CONN->query($sql_query)) {
+                                                if ($results->num_rows > 0) {
+
+                                                    while ($row = $results->fetch_array()) {
+                                                        echo '<tr>';
+                                                        echo '<td class="c">' . $row['order'] . '</td>';
+                                                        echo '<td class="l">' . $row['Rotation'] . '</td>';
+                                                        echo '<td class="l">' . $row['common'] . '</td>';
+                                                        echo '<td class="l">' . $row['scientific'] . '</td>';
+                                                        echo '</tr>';
+                                                    }
+
+                                                }
+                                            }
+
+                                            // close DB connection
+                                            $DB_CONN->close();
+                                            ?>
+
+                                        </table>
+                                    </div>
+                                    
                                 </div>
                                 
                                 <div id="crops" class="tab-pane fade">
                                     <h1>CROPS</h1>
+                                    
+                                    <div style="overflow-x: auto;">
+                                        <table>
+                                            <tr>
+                                                <th colspan="2">Crop</th>                                        
+                                                <th>abbrv</th>
+                                                <th>Rotation</th>
+                                                <th>Growth Habit</th>
+                                                <th>Support</th>
+                                                <th>Earth Cover</th>
+                                                <th>Air Cover</th>
+                                                <th>Planting Method</th>
+                                                <th colspan="2">Seeds per Gram</th>
+                                                <th colspan="3">Soil Temp (&#8451;)</th>
+                                                <th colspan="2"><abbr title="Days to Germination">DTG</abbr></th>
+                                                <th colspan="2"><abbr title="Days to Transplant">DTT</abbr></th>
+                                                <th>Within Row (cm)</th>
+                                                <th>Between Row (cm)</th>
+                                                <th>Sowing Depth (mm)</th>
+                                                <th>Rows per Bed</th>
+                                                <th>&nbsp;</th>
+                                            </tr>
+
+                                            <?php 
+
+                                            require('../includes/config-db.php');
+
+                                            // setup SQL query
+                                            $sql_query = "CALL `polestar`.`sp_GetAllCrops`();";
+
+                                            if ($results = $DB_CONN->query($sql_query)) {
+                                                if ($results->num_rows > 0) {
+
+                                                    while ($row = $results->fetch_array()) { ?>
+                                            
+                                                        <tr>
+                                                            <td class="c">
+                                                                <a data-toggle="modal" href="#crop_edit?id=<?php echo $row['id'];?>">edit</a>
+                                                            </td>
+                                                            <td class="l"><?php echo $row['crop'] ?></td>
+                                                            <td class="c"><?php echo $row['abbrv'] ?></td>
+                                                            <td class="l"><?php echo $row['rotation'] ?></td>
+                                                            <td class="l"><?php echo $row['growth'] ?></td>
+                                                            <td class="l"><?php echo $row['support'] ?></td>
+                                                            <td class="l"><?php echo $row['earthCover'] ?></td>
+                                                            <td class="l"><?php echo $row['airCover'] ?></td>
+                                                            <td class="l"><?php echo $row['plantingMethod'] ?></td>
+                                                            <td class="c"><?php echo $row['minSeedsPerGram'] ?></td>
+                                                            <td class="c"><?php echo $row['maxSeedsPerGram'] ?></td>
+                                                            <td class="c"><?php echo $row['minSoilTemp_C'] ?></td>
+                                                            <td class="c"><?php echo $row['optSoilTemp_C'] ?></td>
+                                                            <td class="c"><?php echo $row['maxSoilTemp_C'] ?></td>
+                                                            <td class="c"><?php echo $row['dtg_min'] ?></td>
+                                                            <td class="c"><?php echo $row['dtg_max'] ?></td>
+                                                            <td class="c"><?php echo $row['dtt_min'] ?></td>
+                                                            <td class="c"><?php echo $row['dtt_max'] ?></td>
+                                                            <td class="c"><?php echo $row['withinRow_cm'] ?></td>
+                                                            <td class="c"><?php echo $row['betweenRow_cm'] ?></td>
+                                                            <td class="c"><?php echo $row['sowingDepth_mm'] ?></td>
+                                                            <td class="c"><?php echo $row['noRowsPerBed'] ?></td>
+                                                            <td class="c">
+                                                                <a data-toggle="modal" href="#crop_del?id=<?php echo $row['id'];?>">X</a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+
+                                                }
+                                            }
+
+                                            // close DB connection
+                                            $DB_CONN->close();
+                                            ?>
+
+                                        </table>
+                                    </div>
+                                    
+                                    <div id="crop_edit" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            
+                                            <div class="modal-content">
+                                                
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Edit Crop</h4>
+                                                </div>
+                                                
+                                                <div class="modal-body">
+                                                    <h4>[Crop Data]</h4>
+                                                </div>
+                                                
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                </div>                                                
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 
                                 <div id="varieties" class="tab-pane fade">
@@ -123,8 +304,8 @@
                         <div class="col-sm-3 col-md-3 col-lg-3" style="padding: 20px;">
 
                             <ul class="nav nav-tabs nav-stacked">
-                                <li class="active"><a data-toggle="tab" href="2020wobs">Weather Observations</a></li>
-                                <li><a data-toggle="tab" href="2020pobs">Phenological Observations</a></li>
+                                <li class="active"><a data-toggle="tab" href="#2020wobs">Weather Observations</a></li>
+                                <li><a data-toggle="tab" href="#2020pobs">Phenological Observations</a></li>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Map <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
@@ -152,7 +333,7 @@
                                 </div>
                                 
                                 <div id="2020pobs" class="tab-pane fade">
-                                    <h1>PHENOLOGICAL OBSERVATIONS</h1>
+                                    <h1>PHENOLOGY</h1>
                                 </div>
                                 
                                 <div id="2020pmap" class="tab-pane fade">
@@ -164,7 +345,7 @@
                                 </div>
                                 
                                 <div id="2020activity" class="tab-pane fade">
-                                    <h1>ACTIVITY LOG</h1>
+                                    <h1>ACTIVITY</h1>
                                 </div>
                                 
                                 <div id="2020plantings" class="tab-pane fade">
@@ -184,7 +365,7 @@
                                 </div>
                                 
                                 <div id="2020inputs" class="tab-pane fade">
-                                    <h1>INPUT LOG</h1>
+                                    <h1>INPUTS</h1>
                                 </div>
                                 
                                 <div id="2020seedsearch" class="tab-pane fade">

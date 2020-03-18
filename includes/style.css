@@ -7,6 +7,49 @@ and open the template in the editor.
     Created on : Nov. 16, 2019, 3:31:06 p.m.
     Author     : hiccup
 */
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin: 15px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+td, th {
+    border: 1px solid #000000;
+    padding: 4px;
+    width: auto;
+}
+
+th {
+    background-color: #990000;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    height: 100px;
+}
+
+td {
+    height: 50px;
+}
+
+td.l {
+    text-align: left;
+}
+
+td.c {
+    text-align: center;
+}
+
+td.r {
+    text-align: right;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 .tab-content .tab-pane {
     width: 90%;
     margin: auto;

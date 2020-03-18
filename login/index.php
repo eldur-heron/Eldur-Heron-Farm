@@ -34,7 +34,7 @@
                         <span style="color: #990000;">
                             <?php
                                 if ($errorMsg != '') {
-                                    echo "ERROR: " . $errorMsg;
+                                    echo 'ERROR: ' . $errorMsg;
                                 }
                             ?>
                         </span>

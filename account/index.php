@@ -37,6 +37,27 @@
     </div>
     
     <div class="row">
+        <div class="col-lg-12">
+            <?php 
+
+            if ($changedpw) {
+                echo '<h4 style="color: #006400">';
+                    echo 'Successfully changed password!';
+                echo '</h4>';
+            } else if ($errorMsg != '') {
+                echo '<h4 style="color: #800000">';
+                    echo 'Failed to change password: ' . $errorMsg;
+                echo '</h4>';
+            }
+
+            ?>            
+        </div>
+    </div>
+    
+    
+    
+    
+    <div class="row">
         <div class="col-sm-4">
             Username:
         </div>
@@ -115,7 +136,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="changepw.php" method="POST">
+                    <form role="form" action="changepw.php" method="POST">
 
                         <div class="form-group">
 
@@ -127,13 +148,13 @@
 
                         <div class="form-group">
 
-                            <label for="oldpw">New Password:</label>
+                            <label for="newpw">New Password:</label>
 
-                            <input type="password" class="form-control" id="newpw1">
+                            <input type="password" class="form-control" id="newpw">
 
                         </div>
 
-                        <button type="submit" class="btn btn-default" data-dismiss="modal">
+                        <button type="submit" class="btn btn-success">
                             Change
                         </button>            
 
